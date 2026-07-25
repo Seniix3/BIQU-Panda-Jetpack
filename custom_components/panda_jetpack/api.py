@@ -77,11 +77,21 @@ class PandaJetpackApi:
                 active = item
                 break
 
+        # Kleur per effect: "#RRGGBBAA"
+        rgba = str(active.get("rgb_rgba", "#FFFFFFFF"))
+        try:
+            rgb = (int(rgba[1:3], 16), int(rgba[3:5], 16), int(rgba[5:7], 16))
+        except (ValueError, IndexError):
+            rgb = (255, 255, 255)
+
         return {
             "on": bool(int(settings.get("on", 0))),
             "mode": mode,
             "brightness": int(active.get("brightness", 50)),
             "speed": int(active.get("speed", 50)),
+            "rgb": rgb,
+            "follow": bool(int(settings.get("follow", 0))),
+            "warning_override": bool(int(settings.get("warning_override", 0))),
             "fw_version": settings.get("fw_version"),
             "hostname": raw.get("sta", {}).get("hostname"),
             "ap_ssid": raw.get("ap", {}).get("ssid"),

@@ -6,6 +6,7 @@ from typing import Any
 from homeassistant.components.light import (
     ATTR_BRIGHTNESS,
     ATTR_EFFECT,
+    ATTR_RGB_COLOR,
     ColorMode,
     LightEntity,
     LightEntityFeature,
@@ -34,8 +35,8 @@ class PandaJetpackLight(PandaJetpackEntity, LightEntity):
     """De LED-strip van de Panda Jetpack als light-entiteit."""
 
     _attr_name = None  # gebruik de apparaatnaam
-    _attr_color_mode = ColorMode.BRIGHTNESS
-    _attr_supported_color_modes = {ColorMode.BRIGHTNESS}
+    _attr_color_mode = ColorMode.RGB
+    _attr_supported_color_modes = {ColorMode.RGB}
     _attr_supported_features = LightEntityFeature.EFFECT
     _attr_effect_list = EFFECTS
 
@@ -51,6 +52,10 @@ class PandaJetpackLight(PandaJetpackEntity, LightEntity):
     def brightness(self) -> int:
         # Apparaat: 0-100, Home Assistant: 0-255
         return round(self.coordinator.data["brightness"] * 255 / 100)
+
+    @property
+    def rgb_color(self) -> tuple[int, int, int]:
+        return self.coordinator.data["rgb"]
 
     @property
     def effect(self) -> str | None:
@@ -78,6 +83,13 @@ class PandaJetpackLight(PandaJetpackEntity, LightEntity):
         if not data["on"]:
             await self.api.send_settings(rgb_info_mode=mode, on=1)
             changes["on"] = True
+
+        if ATTR_RGB_COLOR in kwargs:
+            r, g, b = kwargs[ATTR_RGB_COLOR]
+            await self.api.send_settings(
+                rgb_info_mode=mode, rgb_rgba=f"#{r:02X}{g:02X}{b:02X}FF"
+            )
+            changes["rgb"] = (r, g, b)
 
         if ATTR_BRIGHTNESS in kwargs:
             pct = max(0, min(100, round(kwargs[ATTR_BRIGHTNESS] * 100 / 255)))
