@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="images/logo.png" alt="BIQU logo" width="180">
+  <img src="https://raw.githubusercontent.com/Seniix3/BIQU-Panda-Jetpack/main/images/logo.png" alt="BIQU logo" width="180">
 </p>
 
 # Panda Jetpack for Home Assistant
