@@ -3,10 +3,10 @@
   "name": "Panda Jetpack",
   "codeowners": [],
   "config_flow": true,
-  "documentation": "https://github.com/CHANGE-ME/panda-jetpack-homeassistant",
+  "documentation": "https://github.com/Seniix3/BIQU-Panda-Jetpack",
   "integration_type": "device",
   "iot_class": "local_polling",
-  "issue_tracker": "https://github.com/CHANGE-ME/panda-jetpack-homeassistant/issues",
+  "issue_tracker": "https://github.com/Seniix3/BIQU-Panda-Jetpack/issues",
   "requirements": [],
   "version": "1.3.1"
 }
