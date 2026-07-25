@@ -1,0 +1,19 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Panda Jetpack",
+        "description": "Enter the IP address of your Panda Jetpack LED controller.",
+        "data": {
+          "host": "IP address"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Cannot connect to the device. Check the IP address."
+    },
+    "abort": {
+      "already_configured": "This device is already configured."
+    }
+  }
+}
