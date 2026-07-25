@@ -12,7 +12,9 @@ Custom integration for the **BIGTREETECH Panda Jetpack** LED controller
 | Entity | Type | Function |
 |---|---|---|
 | Panda Jetpack | `light` | On/off, brightness (0-100%), light effect selection |
+| Brightness | `number` | Brightness slider (0-100%), same value as the light entity |
 | Effect speed | `number` | Speed of animated effects (0-100%) |
+| Light effect | `select` | Active light effect as a dropdown (also available via the light entity) |
 
 Supported effects: Static, Breathing, Strobing, Wave, Marquee, Color Cycle,
 Rainbow, Warning Hot, Fan Speed, H2D Style.
