@@ -106,8 +106,15 @@ class PandaJetpackApi:
             finally:
                 await ws.close()
 
+    # De firmware parseert deze keys strikt als string (zoals HTML-sliders ze
+    # aanleveren); als getal worden ze genegeerd.
+    _STRING_KEYS = ("rgb_info_brightness", "rgb_info_speed")
+
     async def send_settings(self, **settings: Any) -> None:
         """Send a settings command, e.g. send_settings(rgb_info_mode=9, on=1)."""
+        for key in self._STRING_KEYS:
+            if key in settings:
+                settings[key] = str(settings[key])
         async with self._lock:
             ws = await self._connect()
             try:
